@@ -28,12 +28,21 @@
                             <textarea id="description-{{ child.id }}" name="description" rows="4" placeholder="Describe the behavior..."></textarea><br>
                             <button type="submit">Submit Behavior</button>
                         </form>
+                        <a href="{% url 'appeal_status' child.id %}" class="button">Appeal Status</a>
                     </div>
                 {% endfor %}
             {% else %}
                 <p>No children found.</p>
             {% endif %}
         </section>
+
+        <section id="submit-behavior-button">
+            <h2>Submit New Behavior</h2>
+            <a href="{% url 'submit_behavior' %}">
+                <button type="button">Add Behavior</button>
+            </a>
+        </section>
+
     </main>
 
     <footer>

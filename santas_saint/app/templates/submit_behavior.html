@@ -1,0 +1,31 @@
+<!-- backend/app/templates/app/submit_behavior.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles.css"> <!-- Adjust path as necessary -->
+    <title>Submit Behavior</title>
+</head>
+<body>
+    <h1>Submit Behavior</h1>
+    
+    <form action="{% url 'submit_behavior' %}" method="POST">
+        {% csrf_token %}
+        <label for="child_id">Select Child:</label>
+        <select name="child_id" id="child_id">
+            {% for child in children %}
+                <option value="{{ child.id }}">{{ child.name }}</option>
+            {% endfor %}
+        </select>
+        
+        <label for="description">Behavior Description:</label><br>
+        <textarea id="description" name="description" rows="4" placeholder="Describe the behavior..."></textarea><br>
+        
+        <button type="submit">Submit</button>
+    </form>
+
+    <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+</body>
+</html>
