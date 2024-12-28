@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Santa's Saint Dashboard</title>
+</head>
+<body>
+    <header>
+        <h1>Santa's Saint Dashboard</h1>
+    </header>
+
+    <main>
+        <section id="children-list">
+            <h2>Children's Behavior</h2>
+            {% if children %}
+                {% for child in children %}
+                    <div class="child">
+                        <h3>{{ child.name }}</h3>
+                        <p><strong>Score:</strong> {{ child.score }}</p>
+                        <p><strong>Status:</strong> {{ child.status }}</p>
+
+                        <form action="{% url 'submit_behavior' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="child_id" value="{{ child.id }}">
+                            <label for="description-{{ child.id }}">Enter behavior:</label><br>
+                            <textarea id="description-{{ child.id }}" name="description" rows="4" placeholder="Describe the behavior..."></textarea><br>
+                            <button type="submit">Submit Behavior</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No children found.</p>
+            {% endif %}
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Santa's Saint. All rights reserved.</p>
+    </footer>
+</body>
+</html>

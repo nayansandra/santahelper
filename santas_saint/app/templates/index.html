@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Santa's Saint Dashboard</title>
+</head>
+<body>
+    <h1>Santa's Saint Dashboard</h1>
+    
+    <div id="children-list">
+        {% for child in children %}
+            <div class="child">
+                <h2>{{ child.name }}</h2>
+                <p>Score: {{ child.score }}</p>
+                <p>Status: {{ child.status }}</p>
+                <form action="{% url 'submit_behavior' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="child_id" value="{{ child.id }}">
+                    <textarea name="description" placeholder="Enter behavior..."></textarea>
+                    <button type="submit">Submit Behavior</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
