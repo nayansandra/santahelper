@@ -1,11 +1,11 @@
-<!-- backend/app/templates/app/add_child.html -->
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles.css"> <!-- Adjust path as necessary -->
+    <link rel="stylesheet" href="../styles.css">
     <title>Add Child</title>
 </head>
 <body>
@@ -22,7 +22,7 @@
             <label for="score">Score:</label><br>
             <input type="number" id="score" name="score" required min="0" max="10"><br>
 
-            <button type="submit">Add Child</button>
+            <button type="submit" class="button">Add Child</button>
         </form>
 
         <a href="{% url 'dashboard' %}">Back to Dashboard</a>
@@ -31,5 +31,23 @@
     <footer>
         <p>&copy; 2024 Santa's Saint. All rights reserved.</p>
     </footer>
+
+    <style>
+        .button {
+            display: inline-block; /* Makes the link behave like a block element */
+            padding: 10px 20px; /* Vertical and horizontal padding */
+            margin-top: 20px; /* Space above the button */
+            background-color: #134d0e;
+            color: white; /* White text color */
+            text-align: center; /* Center the text */
+            text-decoration: none; /* Remove underline from links */
+            border-radius: 5px; /* Rounded corners */
+            transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+        }
+
+        .button:hover {
+            background-color: #1e8115;
+        }
+    </style>
 </body>
 </html>
