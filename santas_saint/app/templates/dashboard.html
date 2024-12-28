@@ -1,9 +1,11 @@
+<!-- backend/app/templates/app/dashboard.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css"> <!-- Adjust path as necessary -->
     <title>Santa's Saint Dashboard</title>
 </head>
 <body>
@@ -14,40 +16,67 @@
     <main>
         <section id="children-list">
             <h2>Children's Behavior</h2>
-            {% if children %}
-                {% for child in children %}
-                    <div class="child">
-                        <h3>{{ child.name }}</h3>
-                        <p><strong>Score:</strong> {{ child.score }}</p>
-                        <p><strong>Status:</strong> {{ child.status }}</p>
 
-                        <form action="{% url 'submit_behavior' %}" method="POST">
-                            {% csrf_token %}
-                            <input type="hidden" name="child_id" value="{{ child.id }}">
-                            <label for="description-{{ child.id }}">Enter behavior:</label><br>
-                            <textarea id="description-{{ child.id }}" name="description" rows="4" placeholder="Describe the behavior..."></textarea><br>
-                            <button type="submit">Submit Behavior</button>
-                        </form>
-                        <a href="{% url 'appeal_status' child.id %}" class="button">Appeal Status</a>
-                    </div>
-                {% endfor %}
+            <!-- Add a button to add a new child -->
+            <a href="{% url 'add_child' %}" class="button">Add New Child</a>
+
+            {% if children %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Score</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for child in children %}
+                            <tr>
+                                <td>{{ child.name }}</td>
+                                <td>{{ child.score }}</td>
+                                <td>{{ child.status }}</td>
+                                <td>
+                                    <!-- Button to redirect to appeal status page -->
+                                    <a href="{% url 'appeal_status' child.id %}" class="button">Appeal Status</a>
+
+                                    <!-- Removed Submit Behavior button -->
+                                    <!-- Form for submitting behavior has been removed -->
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             {% else %}
                 <p>No children found.</p>
             {% endif %}
         </section>
-
-        <section id="buttons">
-            <h2>Submit New Behavior</h2>
-            <a href="{% url 'submit_behavior' %}">
-                <button type="button">Add Behavior</button>
-            </a>
-            <a href="{% url 'add_child' %}" class="button">Add New Child</a>
-        </section>
-
     </main>
 
     <footer>
-        <p>&copy; 2024 Santa's Saint.All rights reserved.</p>
+        <p>&copy; 2024 Santa's Saint. All rights reserved.</p>
     </footer>
+
+    <!-- Optional: Add some styles for the table -->
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+
 </body>
 </html>
