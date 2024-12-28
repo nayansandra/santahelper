@@ -36,11 +36,12 @@
             {% endif %}
         </section>
 
-        <section id="submit-behavior-button">
+        <section id="buttons">
             <h2>Submit New Behavior</h2>
             <a href="{% url 'submit_behavior' %}">
                 <button type="button">Add Behavior</button>
             </a>
+            <a href="{% url 'add_child' %}" class="button">Add New Child</a>
         </section>
 
     </main>

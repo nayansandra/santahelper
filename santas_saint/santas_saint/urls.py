@@ -19,11 +19,12 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from app.views import dashboard, submit_behavior, appeal_status
+from app.views import dashboard, submit_behavior, appeal_status,add_child
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', dashboard, name='dashboard'),
     path('submit_behavior/', submit_behavior, name='submit_behavior'),
     path('appeal_status/<int:child_id>/', appeal_status, name='appeal_status'),
+    path('add_child/', add_child, name='add_child'),
 ]

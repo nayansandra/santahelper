@@ -1,3 +1,4 @@
+# backend/app/views.py
 
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Child, BehaviorData
@@ -34,3 +35,21 @@ def appeal_status(request, child_id):
     
     # Implement appeal logic here
     return render(request, 'appeal_status.html', {'child': child})
+
+def add_child(request):
+    """Handle adding a new child."""
+    if request.method == "POST":
+        name = request.POST.get('name')
+        status = request.POST.get('status')
+
+        # Validate input
+        if not name or not status:
+            return render(request, 'error.html', {'message': 'Please provide both name and status.'})
+
+        # Create a new Child object
+        Child.objects.create(name=name, status=status)
+
+        # Redirect to the dashboard after successful addition
+        return redirect('dashboard')
+
+    return render(request, 'add_child.html')  # Render the add child form
