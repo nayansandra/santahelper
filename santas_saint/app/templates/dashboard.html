@@ -17,8 +17,7 @@
         <section id="children-list">
             <h2>Children's Behavior</h2>
 
-            <!-- Add a button to add a new child -->
-            <a href="{% url 'add_child' %}" class="button">Add New Child</a>
+            
 
             {% if children %}
                 <table>
@@ -51,6 +50,8 @@
                 <p>No children found.</p>
             {% endif %}
         </section>
+        <!-- Add a button to add a new child -->
+        <a href="{% url 'add_child' %}" class="button">Add New Child</a>
     </main>
 
     <footer>
@@ -70,11 +71,26 @@
             text-align: left;
         }
         th {
-            background-color: #4CAF50;
+            background-color: #134d0e;
             color: white;
         }
         tr:hover {
             background-color: #f1f1f1;
+        }
+        .button {
+            display: inline-block; /* Makes the link behave like a block element */
+            padding: 10px 20px; /* Vertical and horizontal padding */
+            margin-top: 20px; /* Space above the button */
+            background-color: #d33737; /* Green background color */
+            color: white; /* White text color */
+            text-align: center; /* Center the text */
+            text-decoration: none; /* Remove underline from links */
+            border-radius: 5px; /* Rounded corners */
+            transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+        }
+
+        .button:hover {
+            background-color: #d33737; /* Darker green on hover */
         }
     </style>
 

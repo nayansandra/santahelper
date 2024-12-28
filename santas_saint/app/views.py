@@ -40,16 +40,23 @@ def add_child(request):
     """Handle adding a new child."""
     if request.method == "POST":
         name = request.POST.get('name')
-        status = request.POST.get('status')
+        score = request.POST.get('score')
 
         # Validate input
-        if not name or not status:
-            return render(request, 'error.html', {'message': 'Please provide both name and status.'})
+        if not name or not score:
+            return render(request, 'error.html', {'message': 'Please provide both name and score.'})
 
-        # Create a new Child object
-        Child.objects.create(name=name, status=status)
+        try:
+            score = int(score)  # Convert score to an integer
+            # Determine status based on score
+            status = 'Nice' if score > 5 else 'Naughty'
 
-        # Redirect to the dashboard after successful addition
-        return redirect('dashboard')
+            # Create a new Child object
+            Child.objects.create(name=name, score=score, status=status)
+
+            # Redirect to the dashboard after successful addition
+            return redirect('dashboard')
+        except ValueError:
+            return render(request, 'error.html', {'message': 'Score must be a valid integer.'})
 
     return render(request, 'add_child.html')  # Render the add child form
