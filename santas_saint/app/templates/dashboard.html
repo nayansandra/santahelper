@@ -27,7 +27,9 @@
                             <th>Name</th>
                             <th>Score</th>
                             <th>Status</th>
+                            <th>Appeal Reason</th>
                             <th>Actions</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -36,6 +38,7 @@
                                 <td>{{ child.name }}</td>
                                 <td>{{ child.score }}</td>
                                 <td>{{ child.status }}</td>
+                                <td>{{ child.appeal_reason|default:"N/A" }}</td>
                                 <td>
                                     <!-- Button to redirect to appeal status page -->
                                     <a href="{% url 'appeal_status' child.id %}" class="button">Appeal Status</a>

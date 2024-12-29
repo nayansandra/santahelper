@@ -27,12 +27,27 @@ def submit_behavior(request):
         return redirect('dashboard')
     
     return render(request, 'submit_behavior.html')  # Add a form template if needed
-
 def appeal_status(request, child_id):
-    """Placeholder for handling child status appeals."""
+    """Handle child status appeals."""
     child = get_object_or_404(Child, id=child_id)
-    
-    # Implement appeal logic here
+
+    if request.method == "POST":
+        appeal_reason = request.POST.get('appeal_reason')
+
+        # Validate input
+        if not appeal_reason:
+            return render(request, 'appeal_status.html', {
+                'child': child,
+                'error_message': 'Please provide a reason for your appeal.'
+            })
+
+        # Save the appeal reason to the Child model
+        child.appeal_reason = appeal_reason
+        child.save()  # Save changes to the database
+        
+        # Redirect to dashboard after saving
+        return redirect('dashboard')
+
     return render(request, 'appeal_status.html', {'child': child})
 
 def add_child(request):

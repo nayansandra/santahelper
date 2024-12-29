@@ -14,6 +14,7 @@ class BehaviorData(models.Model):
     child = models.ForeignKey(Child, on_delete=models.CASCADE)
     description = models.TextField()
     date_submitted = models.DateTimeField(auto_now_add=True)
+    appeal_reason = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.child.name} - {self.date_submitted}"
